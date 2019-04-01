@@ -36,37 +36,37 @@ int main(){
   while(flg){
     flg = false;
     // dreamerase
-    if(s.substr(pos, (dreamerase.size() -1)) == dreamerase){
+    if(s.substr(pos, pos + (dreamerase.size() -1)) == dreamerase){
       t += dreamerase;
       pos += (dreamerase.size() -1);
       flg = true;
     }
     // eraseerase
-    if(s.substr(pos, (eraseerase.size() -1)) == eraseerase){
+    if(s.substr(pos, pos + (eraseerase.size() -1)) == eraseerase){
       t += eraseerase;
       pos += (eraseerase.size() -1);
       flg = true;
     }
     // dreamer
-    if(s.substr(pos, (dreamer.size() -1)) == dreamer){
+    if(s.substr(pos, pos + (dreamer.size() -1)) == dreamer){
       t += dreamer;
       pos += (dreamer.size() -1);
       flg = true;
     }
     // eraser
-    if(s.substr(pos, (eraser.size() -1)) == eraser){
+    if(s.substr(pos, pos + (eraser.size() -1)) == eraser){
       t += eraser;
       pos += (eraser.size() -1);
       flg = true;
     }
     // dream
-    if(s.substr(pos, (dream.size() -1)) == dream){
+    if(s.substr(pos, pos + (dream.size() -1)) == dream){
       t += dream;
       pos += (dream.size() -1);
       flg = true;
     }
     // erase
-    if(s.substr(pos, (erase.size() -1)) == erase){
+    if(s.substr(pos, pos + (erase.size() -1)) == erase){
       t += erase;
       pos += (erase.size() -1);
       flg = true;
