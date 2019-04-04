@@ -15,9 +15,10 @@ int main(){
   string eraser("eraser");
   string dreamerase("dreamerase");
   string eraseerase("eraseerase");
-  string tmp;
+  string tmp = "\0";
   int i = 0;
   int j = 0;
+  int k = 0;
   int pos = 0;
   int cnt = 0;
   bool flg = true;
@@ -32,52 +33,52 @@ int main(){
   if(cnt < 1 || (int)pow(10.0, 5.0) < cnt || flg == false){
     return 1;
   }
+  // tを初期化する処理
+  for(i = 0; i < cnt; i++){
+    t[i] = 0x30;
+  }
+  //
+  for(i = 0; i < cnt; i++){
+    for(j = 0; j < 4; j++){
+      switch(j){
+        case 0:
+          tmp = dream;
+          break;
+        case 1:
+          tmp = eraser;
+          break;
+        case 2:
+          tmp = dreamerase;
+          break;
+        case 3:
+          tmp = eraseerase;
+          break;
+        default:
+          tmp = "\0";
+          break;
+      }
+      for(k = 0; k < tmp.size(); k++){
+        if(s[i + k] == tmp[k]){
+          t[i + k] = tmp[k];
+          printf("%c\n",t[i + k]);
+        }
+      }
+    }
 
-  while(flg){
-    flg = false;
-    // dreamerase
-    if(s.substr(pos, pos + (dreamerase.size() -1)) == dreamerase){
-      t += dreamerase;
-      pos += (dreamerase.size() -1);
-      flg = true;
-    }
-    // eraseerase
-    if(s.substr(pos, pos + (eraseerase.size() -1)) == eraseerase){
-      t += eraseerase;
-      pos += (eraseerase.size() -1);
-      flg = true;
-    }
-    // dreamer
-    if(s.substr(pos, pos + (dreamer.size() -1)) == dreamer){
-      t += dreamer;
-      pos += (dreamer.size() -1);
-      flg = true;
-    }
-    // eraser
-    if(s.substr(pos, pos + (eraser.size() -1)) == eraser){
-      t += eraser;
-      pos += (eraser.size() -1);
-      flg = true;
-    }
-    // dream
-    if(s.substr(pos, pos + (dream.size() -1)) == dream){
-      t += dream;
-      pos += (dream.size() -1);
-      flg = true;
-    }
-    // erase
-    if(s.substr(pos, pos + (erase.size() -1)) == erase){
-      t += erase;
-      pos += (erase.size() -1);
-      flg = true;
-    }
     if(s.size() <= t.size()){
       break;
     }
   }
 
-  if(s != t){
+  if(s.size() != t.size()){
     flg = false;
+  }
+
+  for(i = 0; i < t.size(); i++){
+    if(s[i] != t[i]){
+      flg = false;
+      break;
+    }
   }
 
   if(flg){
