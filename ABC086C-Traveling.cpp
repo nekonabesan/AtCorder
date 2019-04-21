@@ -54,12 +54,11 @@ int main(){
     }
     // check x, y
     if(
-      (ary_x[i] == ary_x[i - 1])
-      &&
-      (ary_y[i] == ary_y[i - 1])
+      (abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1])) == 0
       &&
       abs(ary_t[i] - ary_t[i - 1]) % 2 != 0
     ){
+      printf("%d\n", abs(ary_t[i] - ary_t[i - 1]) % 2);
       flg = false;
       break;
     } else {
