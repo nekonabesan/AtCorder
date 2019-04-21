@@ -22,7 +22,12 @@ int main(){
     return 1;
   }
   //
-  int ary[n + 1];
+  int ary_t[n + 1];
+  int ary_x[n + 1];
+  int ary_y[n + 1];
+  ary_t[0] = 0;
+  ary_x[0] = 0;
+  ary_y[0] = 0;
   for(i = 1; i <= n; i++){
     cin >> t >> x >> y;
     if(t < 1 || (int)pow(10.0, 5.0) < t){
@@ -37,30 +42,45 @@ int main(){
       flg2 = false;
       break;
     }
-    ary[i] = t;
+    ary_t[i] = t;
+    ary_x[i] = x;
+    ary_y[i] = y;
+    // check t
     if(1 < i && i <= n){
-      if(t < ary[i - 1]){
+      if(ary_t[i] < ary_t[i - 1]){
         flg2 = false;
         break;
       }
     }
-    //
-    if(t < (x + y)){
+    // check x, y
+    if(
+      (ary_x[i] == ary_x[i - 1])
+      &&
+      (ary_y[i] == ary_y[i - 1])
+      &&
+      abs(ary_t[i] - ary_t[i - 1]) % 2 != 0
+    ){
       flg = false;
       break;
-    }
-    if(t % (x + y) != 0){
-      flg = false;
-      break;
+    } else {
+      if(
+        (abs(ary_t[i] - ary_t[i - 1]) < ((abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1]))))
+        ||
+        (abs(ary_t[i] - ary_t[i - 1]) % ((abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1]))) != 0)
+      ){
+        flg = false;
+        break;
+      }
     }
   }
   if(flg2 == false){
     return 1;
-  }
-  if(flg == true){
-    cout << "YES" << endl;
   } else {
-    cout << "NO" << endl;
+    if(flg == true){
+      cout << "YES" << endl;
+    } else {
+      cout << "NO" << endl;
+    }
   }
   return 0;
 }
