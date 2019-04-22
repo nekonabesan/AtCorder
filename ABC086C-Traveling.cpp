@@ -53,20 +53,15 @@ int main(){
       }
     }
     // check x, y
-    if(
-      (abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1])) == 0
-      &&
-      abs(ary_t[i] - ary_t[i - 1]) % 2 != 0
-    ){
-      printf("%d\n", abs(ary_t[i] - ary_t[i - 1]) % 2);
-      flg = false;
-      break;
+    if((abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1])) == 0){
+      if((abs(ary_t[i] - ary_t[i - 1]) % 2) != 0){
+      	flg = false;
+      	break;
+      }
     } else {
-      if(
-        (abs(ary_t[i] - ary_t[i - 1]) < ((abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1]))))
+      if((abs(ary_t[i] - ary_t[i - 1]) < ((abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1]))))
         ||
-        (abs(ary_t[i] - ary_t[i - 1]) % ((abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1]))) != 0)
-      ){
+        (abs(ary_t[i] - ary_t[i - 1]) % ((abs(ary_x[i] - ary_x[i - 1]) + abs(ary_y[i] - ary_y[i - 1]))) != 0)){
         flg = false;
         break;
       }
