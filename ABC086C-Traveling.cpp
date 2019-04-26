@@ -48,6 +48,7 @@ int main(){
     // check t
     if(1 < i && i <= n){
       if(ary_t[i] < ary_t[i - 1]){
+        printf("%d\n", ary_t[i-1]);
         flg2 = false;
         break;
       }
@@ -71,9 +72,9 @@ int main(){
     return 1;
   } else {
     if(flg == true){
-      cout << "YES" << endl;
+      cout << "Yes" << endl;
     } else {
-      cout << "NO" << endl;
+      cout << "No" << endl;
     }
   }
   return 0;
