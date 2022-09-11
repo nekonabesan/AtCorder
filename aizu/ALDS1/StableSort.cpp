@@ -14,32 +14,22 @@ void echo(struct Card array[], int num) {
     cout << endl;
 }
 
-int bubbleSort(struct Card array[], int num) {
+void bubbleSort(struct Card array[], int num) {
     struct Card tmp;
-    int cnt = 0;
-    int flg = 1;
-    int j;
-
     
-    while (flg == 1) {
-        flg = 0;
-        for (int i = num - 1; i >= 1; i--) {
-            if (array[i].value < array[i - 1].value) {
-                tmp = array[i];
-                array[i] = array[i - 1];
-                array[i - 1] = tmp;
-                flg = 1;
-                cnt++;
+    for (int i = 0; i < num; i++) {
+        for (int j = num - 1; j >= i + 1; j--) {
+            if (array[j].value < array[j - 1].value) {
+                tmp = array[j];
+                array[j] = array[j - 1];
+                array[j - 1] = tmp;
             }
         }
     }
-
-    return cnt;
 }
 
-int sellectSort(struct Card array[], int num) {
+void sellectSort(struct Card array[], int num) {
     struct Card tmp;
-    int cnt = 0;
     int minj = 0;
     
     for (int i = 0; i < num; i++) {
@@ -50,14 +40,10 @@ int sellectSort(struct Card array[], int num) {
             }
         }
         
-        if (i != minj) cnt++;
-
         tmp = array[i];
         array[i] = array[minj];
         array[minj] = tmp;
     }
-
-    return cnt;
 }
 
 bool isStable(struct Card array1[], struct Card array2[], int num) {
@@ -106,4 +92,3 @@ int main(void) {
 
     return 0;
 }
-
