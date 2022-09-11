@@ -1,6 +1,7 @@
-/*#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>*/
+/**
+ * デバッグ
+ * https://qiita.com/2019Shun/items/5ab290a4117a00e373b6
+ * */
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
@@ -16,6 +17,17 @@ struct Stack
     struct Stack *next;
 };
 
+struct Stack *tmp_stack;
+
+struct Stack * getStack(void)
+{
+    return tmp_stack;
+}
+
+void setStack(struct Stack *stack)
+{
+    tmp_stack = stack;
+}
 
 struct Stack * bottom(struct Stack *stack)
 {
@@ -51,61 +63,64 @@ struct Stack * head(struct Stack *stack)
     return stack;
 }
 
-struct Stack * initialize(void)
+struct Stack * createStack(void)
 {
     struct Stack *result = (Stack *)malloc(1 * sizeof(Stack));
+    return result;
+}
+
+struct Stack * initialize(void)
+{
+    struct Stack *result = createStack();
+    result->var = "0";
     result->prev = nullptr;
     result->next = nullptr;
 
-    struct Stack *stack = (Stack *)malloc(1 * sizeof(Stack));
-    stack->prev = result;
-    stack->next = nullptr;
-    result->next = stack;
-
-    return head(result);
+    return result;
 }
 
 struct Stack * push(struct Stack *stack, std::string var)
 {
-    std::string tmp;
-    stack = head(stack);
-    tmp = stack->var;
-    
-    if (!var.empty()) {
-        stack->var = var;
+    struct Stack *new_stack = initialize();
+
+    if (stack != nullptr) {
+        stack = head(stack);
+        new_stack->next = stack;
+        stack->prev = new_stack;
     }
-
-    stack = stack->next;
     
-    if (!tmp.empty()) {
-        stack->var = tmp;
+    if(var.size() > 0) {
+        new_stack->var = var;
     }
-
-    stack = head(stack);
     
-
-    return stack;
+    return new_stack;
 }
 
 std::string pop(struct Stack *stack)
 {
+    struct Stack *remove_stack;
     std::string result;
-    std::string tmp;
 
     stack = head(stack);
+
     if (!stack->var.empty()) {
         result = stack->var;
+    } else {
+        result = "0";
     }
-    stack = bottom(stack);
-    if (!stack->var.empty()) {
-        tmp = stack->var;
-    }
-    stack->var = "0";
-    stack = head(stack);
-    if (!tmp.empty()) {
-        stack->var = tmp;
+
+    if(stack->next != nullptr) {
+        remove_stack = stack;
+        stack = stack->next;
+        stack->prev = nullptr;
+        remove_stack = nullptr;
+    } else {
+        stack = nullptr;
     }
     
+    if (stack != nullptr) stack = head(stack);
+
+    setStack(stack);
 
     return result;
 }
@@ -115,42 +130,45 @@ int main(void)
     std::string a;
     std::string b;
     std::string s;
+    int tmp = 0;
 
-    struct Stack *stack = initialize();
+    struct Stack *stack = nullptr;
 
-    while (cin >> s) 
+    while (!(cin >> s).eof()) 
     {
-        
         if (s == std::string("+")) {
             /* code */
             a = pop(stack);
+            stack = getStack();
             b = pop(stack);
-            cout<< to_string(std::stoi(a) + std::stoi(b)) <<endl;
+            stack = getStack();
             stack = push(stack, to_string(std::stoi(a) + std::stoi(b)));
         } else if(s == std::string("-")) {
             /* code */
-            a = pop(stack);
             b = pop(stack);
+            stack = getStack();
+            a = pop(stack);
+            stack = getStack();
             stack = push(stack, to_string(std::stoi(a) - std::stoi(b)));
         } else if(s == std::string("*")) {
             /* code */
             a = pop(stack);
+            stack = getStack();
             b = pop(stack);
+            stack = getStack();
             stack = push(stack, to_string(std::stoi(a) * std::stoi(b)));
-        } else if(s == std::string("/")) {
-            /* code */
-            a = pop(stack);
-            b = pop(stack);
-            stack = push(stack, to_string(std::stoi(a) / std::stoi(b)));
         } else {
             stack = push(stack, s);
         }
 
         stack = head(stack);
-        if(!stack->var.empty()) cout << stack->var << endl;
+
+        if (cin.eof() || cin.fail() || s.empty()) {
+            break;
+        }
     }
 
-    stack = bottom(stack);
-    free(stack->next);
-    free(stack);
+    cout << stack->var << endl;
+
+    return 0;
 }

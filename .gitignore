@@ -1,5 +1,8 @@
 coverage/
 *.o
+*.exe
+*.ilk
+*.pdb
 *.gcda
 *.gcno
 *.exe
