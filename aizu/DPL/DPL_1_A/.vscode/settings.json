@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/mnt/c/Users/sheep/Desktop/aaaa/DPL_1_A",
+            "binaryPath": "/mnt/c/Users/sheep/Desktop/aaaa/DPL_1_A/main",
+            "binaryArgs": []
+        }
+    ]
+}
