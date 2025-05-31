@@ -1,4 +1,5 @@
 coverage/
+__pycache__/
 *.o
 *.exe
 *.ilk
@@ -18,6 +19,7 @@ gtest/
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+*.pyc
 
 # Local History for Visual Studio Code
 .history/
